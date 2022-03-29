@@ -22,14 +22,14 @@ class UserProfileManager(BaseUserManager):
 
     def create_superuser(self, email, name, password):
         """Create and savve a new superuser with given details"""
-        user = user.create_user(email, name, password)
+        user = self.create_user(email, name, password)
 
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
 
         return user
-        
+
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for user in the system"""
     email = models.EmailField(max_length=255, unique=True)
